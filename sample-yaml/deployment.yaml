@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        reun: sample-yaml
+        run: sample-yaml
     spec:
       containers:
         - name: sample-yaml
