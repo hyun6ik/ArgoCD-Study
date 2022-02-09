@@ -1,0 +1,5 @@
+argocd login 127.0.0.1:30080 --username admin --grpc-web
+
+argocd account list
+
+argocd account update-password --account hyun6ik
