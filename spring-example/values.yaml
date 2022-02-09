@@ -8,6 +8,7 @@ service:
   type: NodePort
   protocol: TCP
   port: 8080
+  targetPort: 8080
   nodePort: 31080
 ingress:
   enabled: false
