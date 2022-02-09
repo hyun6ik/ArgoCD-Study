@@ -1,6 +1,6 @@
 replicas: 1
 image:
-  respository: 705494525874.dkr.ecr.ap-northeast-2.amazonaws.com/spring-example
+  repository: 705494525874.dkr.ecr.ap-northeast-2.amazonaws.com/spring-example
   tag: 1.1.2
   imagePullSecrets:
     - name: ecr-cred
