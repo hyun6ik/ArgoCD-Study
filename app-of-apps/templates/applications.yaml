@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     namespace: {{ $app.namespace }}
-    server: 'http://kubernetes.default.svc'
+    server: 'https://kubernetes.default.svc'
   project: {{ $app.project }}
   source:
     path: {{ $app.source.path }}
