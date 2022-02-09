@@ -1,0 +1,13 @@
+replicas: 1
+image:
+  respository: 705494525874.dkr.ecr.ap-northeast-2.amazonaws.com/spring-example
+  tag: 1.1
+  imagePullSecrets:
+    - name: ecr-cred
+service:
+  type: NodePort
+  protocol: TCP
+  port: 8080
+  nodePort: 31080
+ingress:
+  enabled: false
