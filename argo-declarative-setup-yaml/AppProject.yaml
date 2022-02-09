@@ -10,7 +10,7 @@ spec:
   sourceRepos:
     - '*'
 
-  destionations:
+  destinations:
     - namespace: default
       server: https://kubernetes.default.svc
 
