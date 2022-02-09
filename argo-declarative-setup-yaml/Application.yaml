@@ -13,7 +13,7 @@ spec:
     targetRevision: master
     path: sample-yaml
 
-  destionation:
+  destination:
     server: https://kubernetes.default.svc
     namespace: default
 
