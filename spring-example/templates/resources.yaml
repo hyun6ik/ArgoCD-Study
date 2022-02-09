@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "spring-example.fullname" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "spring-example.selectorLabels" . | nindent 6}}
+  template:
+    metadata:
+      labels:
+        {{- include "spring-example.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: ${{ .Values.image.repository }}:${{ .Values.image.tag }}
+          ports:
+            - containerPort: 80
+  {{- with .Values.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}{{- end }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "spring-example.fullname" .}}
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: {{ .Values.service.protocol }}
+      nodePort: {{ .Values.service.nodePort }}
+  selector:
+    {{- include "spring-example.selectorLabels" . | nindent 8 }}
+
+---
+
+  {{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ template "spring-example.fullname" . }}
+  {{- if .Values.ingress.annotations }}
+annotations:
+  {{- range $key, $value := .Values.ingress.annotations }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ template "spring-example.fullname" . }}
+                port:
+                  number: {{ .Values.service.port }}
+  {{- end -}}

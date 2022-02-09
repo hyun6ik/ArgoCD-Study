@@ -8,3 +8,7 @@ apps:
     project: dev
     source:
       path: sample-helm-2
+  - name: spring-example
+    project: dev
+    source:
+      path: spring-example
