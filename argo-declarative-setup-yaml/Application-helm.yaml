@@ -8,7 +8,7 @@ spec:
     namespace: default
     server: 'https://kubernetes.default.svc'
   project: dev
-  soruce:
+  source:
     repoURL: https://github.com/hyun6ik/ArgoCD-Study.git
     targetRevision: master
     path: sample-helm-1
