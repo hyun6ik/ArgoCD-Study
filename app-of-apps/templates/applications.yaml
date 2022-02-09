@@ -1,0 +1,28 @@
+{{- range $app := .Values.apps }}
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $app.name }}
+  namespace: argo
+spec:
+  destination:
+    namespace: default
+    server: 'http://kubernetes.default.svc'
+  project: {{ $app.project }}
+  soruce:
+    path: {{ $app.source.path }}
+    repoURL: {{ $.Values.repoURL }}
+    targetRevision: HEAD
+    helm:
+      valuesFiles:
+        - values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - PrunePropagationPolicy=background
+{{- end }}
