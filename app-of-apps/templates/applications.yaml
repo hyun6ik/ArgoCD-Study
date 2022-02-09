@@ -1,6 +1,5 @@
 {{- range $app := .Values.apps }}
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -8,15 +7,15 @@ metadata:
   namespace: argo
 spec:
   destination:
-    namespace: default
+    namespace: {{ $app.namespace }}
     server: 'http://kubernetes.default.svc'
   project: {{ $app.project }}
-  soruce:
+  source:
     path: {{ $app.source.path }}
     repoURL: {{ $.Values.repoURL }}
-    targetRevision: HEAD
+    targetRevision: master
     helm:
-      valuesFiles:
+      valueFiles:
         - values.yaml
   syncPolicy:
     automated:
